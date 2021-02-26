@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const AWS = require('aws-sdk/global');
-const EC2 = require('aws-sdk/clients/ec2');
+const RDS = require('aws-sdk/clients/rds');
 
 const region = core.getInput('aws-region', { required: true });
 const accessKeyId = core.getInput('aws-access-key-id', { required: true });
@@ -22,7 +22,7 @@ AWS.config.update({
   accessKeyId,
   secretAccessKey,
 });
-const ec2 = new EC2();
+const rds = new RDS();
 
 module.exports = {
   region,
@@ -33,5 +33,5 @@ module.exports = {
   toPort,
   protocol,
   description,
-  ec2,
+  rds,
 };
