@@ -8,7 +8,7 @@ async function run() {
     const myPublicIp = await publicIp.v4();
 
     for (const groupId of config.groupIds) {
-      await config.ec2.revokeSecurityGroupIngress({
+      await config.rds.revokeSecurityGroupIngress({
         GroupId: groupId,
         CidrIp: `${myPublicIp}/32`,
         IpProtocol: config.protocol,
