@@ -26,7 +26,7 @@ async function run() {
           .find(ip => ip.Description === config.description);
 
         if (ipByDesc) {
-          await config.ec2.revokeSecurityGroupIngress({
+          await config.rds.revokeSecurityGroupIngress({
             GroupId: group.GroupId,
             CidrIp: ipByDesc.CidrIp,
             IpProtocol: config.protocol,
@@ -37,7 +37,7 @@ async function run() {
       }
 
       const myPublicIp = await publicIp.v4();
-      await config.ec2.authorizeSecurityGroupIngress({
+      await config.rds.authorizeSecurityGroupIngress({
         GroupId: group.GroupId,
         IpPermissions: [{
           IpProtocol: config.protocol,
